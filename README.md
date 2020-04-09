@@ -4,10 +4,15 @@ Tool for creating and provisioning virtual machine infrastructure. Can connect t
 
 box - package of software
 `vagrant init hashicorp/bionic64` - initializes Vagrantfile in current directory and downloads the box bionic64 (ubuntu)
+
 `vagrant box add hashicorp/bionic64` - just downloads the box
+
 `vagrant up` - run from Vagrantfile
+
 `vagrant reload --provision` - restart and run provision scripts
+
 `vagrant ssh` - ssh into box
+
 `vagrant destroy` - destroy entire box, wiping it from disk. You can also hibernate or halt.
 
 basic Vagrantfile:
@@ -17,13 +22,13 @@ basic Vagrantfile:
 - tells about command to run (provisioning) on startup (but not reload)
 - forwards port 80 inside the machine to host port 4567
 
-`
+```
 Vagrant.configure("2") do |config|
   config.vm.box = "hashicorp/bionic64"
   config.vm.provision :shell, path: "bootstrap.sh"
   config.vm.network :forwarded_port, guest: 80, host: 4567
 end
-`
+```
 
 `bootstrap.sh` is basically a common bash script that can do anything (install, copy, ...).
 
